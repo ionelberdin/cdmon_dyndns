@@ -1,8 +1,8 @@
 # CDmon Dynamic DNS update
 If you have domains in CDmon and want to map them to a dynamic IP, then you have to:
 - Configure a DynDNS user:
--- user
--- password
+  - user
+  - password
 
 Please note that those login details are not the ones to access the customer area.
 
