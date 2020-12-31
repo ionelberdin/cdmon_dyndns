@@ -1,12 +1,60 @@
+"""
+Update the Dynamic DNS service provided by CDmon (https//cdmon.com).
+
+Explanation from CDmon about how to trigger Dynaimc DNS update:
+https://ticket.cdmon.com/es/support/solutions/articles/7000005922-api-de-actualizaci%c3%b3n-de-ip-del-dns-gratis-din%c3%a1mico?set_locale=2&_ga=2.261179533.1883837017.1609418615-1272155764.1496775312
+
+Dependencies:
+    Python 3.x
+    ipgetter2 library
+
+Use cases:
+    1. Check if your login details work:
+    >>> python3 cdmon_dyndns.py -c
+    
+    You'll be prompted to enter user name and password
+    If you'd rather enter those details directly:
+    >>> python3 cdmon_dyndns.py -c -u {username} -p {password}
+
+    Where {username} and {password are placeholders for your actual login details.
+
+    2. Store your login details in a local file.
+    Note: password will be only saved in MD5 encrypted manner.
+    >>> python3 cdmon_dyndns.py -cs [-u {username} -p {password}]
+
+    -c will prevent the script from requesting an IP address
+    The block between backets is optional
+
+    3. Update the IP address using your previously stored login details:
+    >>> python3 cdmon_dyndns.py -lg
+
+    The IP address will be automatically retrieved.
+
+    4. Update to an IP address of your choice:
+    >>> python3 cdmon_dyndns.py -i {IP_address}
+
+    5. Print request URL using verbose mode:
+    >>> python3 cdmon_dyndns.py -v
+
+    6. Send the request from a different script:
+    >>> from cdmon_dyndns import send_request
+    >>> send_request(user, md5pass)  # this will only check if the login succeeds
+    >>> send_request(user, md5pass, ip)  # this will also try to update the IP
+
+Please note that several options may be used in conjunction.
+"""
+
+# Standard library imports
 import argparse
 import hashlib
 import urllib
 
+# 3rd party librariy impots
 from ipgetter2 import ipgetter1 as ipgetter
 
+# Global constants
 CDMON_URL = 'https://dinamico.cdmon.org/onlineService.php?{options}'
 
-    
 def send_request(user, md5pass, ip=None, verbose=False):
 
     # build options string
@@ -24,6 +72,8 @@ def send_request(user, md5pass, ip=None, verbose=False):
     with urllib.request.urlopen(url) as response:
         print(response.read())
 
+def get_ip():
+    return ipgetter.myip()
 
 def save_login_details(user, md5pass):
     with open('login_details.py', 'w') as f:
@@ -74,7 +124,7 @@ if __name__ == '__main__':
     if args.ip is not None:
         ip = args.ip
     elif args.get_ip:
-        ip = ipgetter.myip()
+        ip = get_ip()
     elif not args.check_login:
         ip = input("Enter an IP address:")
     kwargs['ip'] = ip if ip != '' else None
@@ -82,4 +132,3 @@ if __name__ == '__main__':
     kwargs['verbose'] = args.verbose
 
     send_request(**kwargs)
-
