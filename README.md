@@ -38,6 +38,7 @@ The IP address will be automatically retrieved.
 ```bash
 $ python3 cdmon_dyndns.py -i {IP_address}
 ```
+Where ```{IP_address}``` is a placeholder for the actual IP address to use for the update request.
 
 5. Print request URL using verbose mode:
 ```bash
