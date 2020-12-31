@@ -32,6 +32,9 @@ Use cases:
 
     4. Update to an IP address of your choice:
     >>> python3 cdmon_dyndns.py -i {IP_address}
+    
+    Where ```{IP_address}``` is a placeholder for the actual IP address to use 
+    for the update request.
 
     5. Print request URL using verbose mode:
     >>> python3 cdmon_dyndns.py -v
@@ -89,24 +92,24 @@ def store_login_details(user, md5pass):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', '--login_details', default=False,
-                        action='store_true', help="Use stored login details.")
+                        action='store_true', help="use stored login details.")
     parser.add_argument('-c', '--check_login', default=False,
-                        action='store_true', help="Check login details, \
+                        action='store_true', help="check login details, \
                         don't update IP.")
     parser.add_argument('-g', '--get_ip', default=False,
-                        action='store_true', help="Get IP automatically.")
+                        action='store_true', help="get IP automatically.")
     parser.add_argument('-u', '--user', default=None,
-                        help="Provide user name for authentication.")
+                        help="provide user name for authentication.")
     parser.add_argument('-p', '--passwd', default=None,
-                        help="Provide raw password for authentication.")
+                        help="provide raw password for authentication.")
     parser.add_argument('-m', '--md5pass', default=None,
-                        help="Provide MD5 ecrypted password for authentication.")
+                        help="provide MD5 ecrypted password for authentication.")
     parser.add_argument('-i', '--ip', default=None,
-                        help="Provide IP address to be used for the update.")
+                        help="provide IP address to be used for the update.")
     parser.add_argument('-s', '--store_login_details', default=False,
-                        action='store_true', help="Store login details.")
+                        action='store_true', help="store login details.")
     parser.add_argument('-v', '--verbose', default=False,
-                        action='store_true', help="Run script in verbose mode.")
+                        action='store_true', help="run script in verbose mode.")
     args = parser.parse_args()
 
     kwargs = {'user': None, 'md5pass': None}
