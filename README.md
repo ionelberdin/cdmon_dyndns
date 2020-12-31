@@ -1,8 +1,8 @@
 # CDmon Dynamic DNS update
-Update the Dynamic DNS service provided by CDmon (https//cdmon.com).
+Update the Dynamic DNS service provided by CDmon ([https//cdmon.com](https//cdmon.com)).
 
 Explanation from CDmon about how to trigger Dynamic DNS update:
-- https://ticket.cdmon.com/es/support/solutions/articles/7000005922-api-de-actualizaci%c3%b3n-de-ip-del-dns-gratis-din%c3%a1mico?set_locale=2&_ga=2.261179533.1883837017.1609418615-1272155764.1496775312
+- [API de actualización de IP del DNS gratis dinámico](https://ticket.cdmon.com/es/support/solutions/articles/7000005922-api-de-actualizaci%c3%b3n-de-ip-del-dns-gratis-din%c3%a1mico?set_locale=2&_ga=2.261179533.1883837017.1609418615-1272155764.1496775312).
 
 Dependencies:
 * ```Python 3.x```
