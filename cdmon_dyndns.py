@@ -19,7 +19,7 @@ Use cases:
     Where {username} and {password are placeholders for your actual login details.
 
     2. Store your login details in a local file.
-    Note: password will be only saved in MD5 encrypted manner.
+    Note: password will be only stored in MD5 encrypted manner.
     >>> python3 cdmon_dyndns.py -cs [-u {username} -p {password}]
 
     -c will prevent the script from requesting an IP address
@@ -41,7 +41,13 @@ Use cases:
     >>> send_request(user, md5pass)  # this will only check if the login succeeds
     >>> send_request(user, md5pass, ip)  # this will also try to update the IP
 
-Please note that several options may be used in conjunction.
+Please note that several other option combinations may also be possible.
+You may get more information about the available options by either reading
+this script, or by invoking the argparse help:
+    >>> python3 cdmon_dyndns.py -h
+
+    or:
+    >>> python3 cdmon_dyndns.py --help
 """
 
 # Standard library imports
@@ -75,7 +81,7 @@ def send_request(user, md5pass, ip=None, verbose=False):
 def get_ip():
     return ipgetter.myip()
 
-def save_login_details(user, md5pass):
+def store_login_details(user, md5pass):
     with open('login_details.py', 'w') as f:
         f.writelines("user = '{}'\nmd5pass = '{}'".format(user, md5pass))
 
@@ -83,21 +89,22 @@ def save_login_details(user, md5pass):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', '--login_details', default=False,
-                        action='store_true', help="Use stored login details")
+                        action='store_true', help="Use stored login details.")
     parser.add_argument('-c', '--check_login', default=False,
-                        action='store_true', help="Check login details")
+                        action='store_true', help="Check login details, \
+                        don't update IP.")
     parser.add_argument('-g', '--get_ip', default=False,
-                        action='store_true', help="tails")
+                        action='store_true', help="Get IP automatically.")
     parser.add_argument('-u', '--user', default=None,
-                        help="User name.")
+                        help="Provide user name for authentication.")
     parser.add_argument('-p', '--passwd', default=None,
-                        help="Unecrypted password.")
+                        help="Provide raw password for authentication.")
     parser.add_argument('-m', '--md5pass', default=None,
-                        help="MD5 ecrypted password.")
+                        help="Provide MD5 ecrypted password for authentication.")
     parser.add_argument('-i', '--ip', default=None,
-                        help="IP address.")
-    parser.add_argument('-s', '--save_login_details', default=False,
-                        action='store_true', help="Save login details.")
+                        help="Provide IP address to be used for the update.")
+    parser.add_argument('-s', '--store_login_details', default=False,
+                        action='store_true', help="Store login details.")
     parser.add_argument('-v', '--verbose', default=False,
                         action='store_true', help="Run script in verbose mode.")
     args = parser.parse_args()
@@ -117,8 +124,8 @@ if __name__ == '__main__':
     kwargs['user'] = user
     kwargs['md5pass'] = md5pass
 
-    if args.save_login_details:
-        save_login_details(**kwargs)
+    if args.store_login_details:
+        store_login_details(**kwargs)
 
     ip = None
     if args.ip is not None:
