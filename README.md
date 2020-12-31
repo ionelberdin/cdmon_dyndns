@@ -1,8 +1,20 @@
 # CDmon Dynamic DNS update
-Update the Dynamic DNS service provided by CDmon ([https//cdmon.com](https//cdmon.com)).
+If you have domains in CDmon and want to map them to a dynamic IP, then you have to:
+- Configure a DynDNS user:
+-- user
+-- password
 
-Explanation from CDmon about how to trigger Dynamic DNS update:
+Please note that those login details are not the ones to access the customer area.
+
+Then point the domain DNS to the dynamic addresses from CDmon  (more details in the links below).
+
+And then associate the domain with the Dynamic DNS user.
+
+From that point onwards, you can use this script to update the Dynamic DNS service provided by CDmon ([https//cdmon.com](https//cdmon.com)).
+
+Instructions from CDmon about how to trigger Dynamic DNS updates:
 - [API de actualización de IP del DNS gratis dinámico](https://ticket.cdmon.com/es/support/solutions/articles/7000005922-api-de-actualizaci%c3%b3n-de-ip-del-dns-gratis-din%c3%a1mico?set_locale=2&_ga=2.261179533.1883837017.1609418615-1272155764.1496775312).
+- [FAQs: Gestor DNS gratis dinámico](https://ticket.cdmon.com/es/support/solutions/articles/7000005916-faqs-gestor-dns-gratis-din%C3%A1mico)
 
 ## Dependencies:
 * ```Python 3.x```
