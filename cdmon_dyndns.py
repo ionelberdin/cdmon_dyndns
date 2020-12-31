@@ -16,14 +16,14 @@ Use cases:
     If you'd rather enter those details directly:
     >>> python3 cdmon_dyndns.py -c -u {username} -p {password}
 
-    Where {username} and {password are placeholders for your actual login details.
+    Where {username} and {password} are placeholders for your actual login details.
 
     2. Store your login details in a local file.
     Note: password will be only stored in MD5 encrypted manner.
     >>> python3 cdmon_dyndns.py -cs [-u {username} -p {password}]
 
-    -c will prevent the script from requesting an IP address
-    The block between backets is optional
+    -c will prevent the script from requesting an IP address.
+    The block between backets is optional.
 
     3. Update the IP address using your previously stored login details:
     >>> python3 cdmon_dyndns.py -lg
