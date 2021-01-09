@@ -78,8 +78,12 @@ def send_request(user, md5pass, ip=None, verbose=False):
         print(url)
 
     # send request
-    with urllib.request.urlopen(url) as response:
-        print(response.read())
+    with urllib.request.urlopen(url) as r:
+        response = r.read().decode('utf-8')
+
+    if verbose:
+        print(response)
+    return response
 
 def get_ip():
     return ipgetter.myip()

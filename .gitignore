@@ -5,3 +5,4 @@ __pycache__/
 
 # File with persnal data
 login_details.py
+ip.log
